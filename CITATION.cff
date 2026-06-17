@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying paper draft and repository."
+title: "Grid-FedGAT-Safe: Safety-Projected Federated Graph Learning for EV Charging Coordination"
+authors:
+  - family-names: Yang
+    given-names: Lewei
+    email: ylw_yang@mail.ustc.edu.cn
+    affiliation: "University of Science and Technology of China, School of Science and Technology, Department of Automation"
+year: 2026
+license: PolyForm-Noncommercial-1.0.0
+repository-code: "https://github.com/FelixY0ung/grid-fedgat-safe"
+type: software

@@ -1,0 +1,32 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+
+# Generated manuscript artifacts
+build/
+*.docx
+*.pdf
+*.png
+
+# Local conference/submission working notes and templates
+ICPICN2026_iteration_audit.md
+ICPICN2026_research_plan.md
+ICPICN2026_submission_checklist.md
+ICPICN2026_submission_condensed.md
+ICPICN2026_paper.md
+data/ICPICN2026_Template.doc
+
+# Large or credential-dependent public-session data
+data/public_ev/*.csv
+results/acn_data_sessions.csv
+
+# Local editor and OS files
+.DS_Store
+*.swp
+*~
