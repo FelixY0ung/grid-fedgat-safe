@@ -116,6 +116,25 @@ def set_right_tab(p: ET.Element, position: int) -> None:
     tab.set(w_attr("pos"), str(position))
 
 
+def set_exact_line_spacing(p: ET.Element, line_twips: int = 260) -> None:
+    ppr = get_ppr(p)
+    spacing = child(ppr, "spacing")
+    if spacing is None:
+        spacing = ET.Element(W + "spacing")
+        ppr.append(spacing)
+    spacing.set(w_attr("line"), str(line_twips))
+    spacing.set(w_attr("lineRule"), "exact")
+
+
+def normalize_inline_math(body: ET.Element) -> None:
+    for p in body.findall("w:p", NS):
+        has_inline_math = p.find("m:oMath", NS) is not None
+        has_display_math = p.find("m:oMathPara", NS) is not None
+        if not has_inline_math or has_display_math:
+            continue
+        set_exact_line_spacing(p)
+
+
 def run_text(text: str) -> ET.Element:
     r = ET.Element(W + "r")
     t = ET.SubElement(r, W + "t")
@@ -314,6 +333,7 @@ def build(src: Path, dst: Path) -> None:
         remove_template_autonumbering(styles_root, numbering_root)
         normalize_paragraphs(body)
         normalize_tables(body)
+        normalize_inline_math(body)
         add_two_column_body_section(body)
         number_display_equations(body)
 
