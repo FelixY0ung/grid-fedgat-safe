@@ -73,6 +73,12 @@ def set_pstyle(p: ET.Element, style: str) -> None:
     pstyle.set(w_attr("val"), style)
 
 
+def set_page_break_before(p: ET.Element) -> None:
+    ppr = get_ppr(p)
+    if child(ppr, "pageBreakBefore") is None:
+        ppr.append(ET.Element(W + "pageBreakBefore"))
+
+
 def is_display_equation_paragraph(p: ET.Element) -> bool:
     children = [elem for elem in list(p) if elem.tag != W + "pPr"]
     return len(children) == 1 and children[0].tag == M + "oMathPara"
@@ -239,6 +245,8 @@ def normalize_paragraphs(body: ET.Element) -> None:
             set_pstyle(p, "Keywords")
         elif text.startswith(("Table I.", "Table II.", "Table III.")):
             set_pstyle(p, "tablehead")
+            if text.startswith("Table III."):
+                set_page_break_before(p)
 
 
 def normalize_tables(body: ET.Element) -> None:
